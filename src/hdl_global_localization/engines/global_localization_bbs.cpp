@@ -45,7 +45,7 @@ void GlobalLocalizationBBS::set_global_map(pcl::PointCloud<pcl::PointXYZ>::Const
   bbs->set_map(map_2d, map_resolution, map_width, map_height, map_pyramid_level, max_points_per_cell);
 
   auto map_3d = unslice(map_2d);
-  map_3d->header.frame_id = "map";
+  map_3d->header.frame_id = "odom";
   map_slice_pub.publish(*map_3d);
   gridmap_pub.publish(bbs->gridmap()->to_rosmsg());
 }

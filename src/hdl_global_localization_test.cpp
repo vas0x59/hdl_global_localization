@@ -40,7 +40,7 @@ public:
       ROS_INFO_STREAM("Failed to set global map");
     }
 
-    cloud->header.frame_id = "map";
+    cloud->header.frame_id = "odom";
     globalmap_pub.publish(*cloud);
   }
 
@@ -69,7 +69,7 @@ public:
 
     pcl::PointCloud<pcl::PointXYZ>::Ptr transformed(new pcl::PointCloud<pcl::PointXYZ>);
     pcl::transformPointCloud(*cloud, *transformed, transformation);
-    transformed->header.frame_id = "map";
+    transformed->header.frame_id = "odom";
 
     points_pub.publish(*transformed);
   }

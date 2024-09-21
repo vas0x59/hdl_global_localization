@@ -52,11 +52,11 @@ transform_2d(const std::vector<Eigen::Vector2f, Eigen::aligned_allocator<Eigen::
 int main(int argc, char** argv) {
   auto map_cloud = pcl::make_shared<pcl::PointCloud<pcl::PointXYZ>>();
   pcl::io::loadPCDFile("/home/koide/catkin_ws/src/hdl_localization/data/map.pcd", *map_cloud);
-  map_cloud->header.frame_id = "map";
+  map_cloud->header.frame_id = "odom";
 
   auto scan_cloud = pcl::make_shared<pcl::PointCloud<pcl::PointXYZ>>();
   pcl::io::loadPCDFile("/home/koide/Downloads/hdl_400/1509348797.060304000.pcd", *scan_cloud);
-  scan_cloud->header.frame_id = "map";
+  scan_cloud->header.frame_id = "odom";
 
   auto map_slice = slice(*map_cloud, 2.0, 2.4);
   auto map_2d = project_to_2d(*map_slice);
@@ -78,7 +78,7 @@ int main(int argc, char** argv) {
   auto viewer = guik::LightViewer::instance();
   auto gridmap = bbs.gridmap();
   viewer->update_drawable(
-    "map",
+    "odom",
     std::make_shared<glk::GridMap>(gridmap->grid_resolution(), gridmap->width(), gridmap->height(), 1.0f, gridmap->data(), 1.0f, glk::GridMap::ColorMode::RAW),
     guik::TextureColor());
   viewer->update_drawable(

@@ -71,7 +71,7 @@ public:
 
   nav_msgs::OccupancyGridConstPtr to_rosmsg() const {
     nav_msgs::OccupancyGridPtr msg(new nav_msgs::OccupancyGrid);
-    msg->header.frame_id = "map";
+    msg->header.frame_id = "odom";
     msg->header.stamp = ros::Time(0);
 
     msg->data.resize(values.rows * values.cols);
